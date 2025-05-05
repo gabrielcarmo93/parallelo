@@ -4,11 +4,11 @@ export async function parallelo<T, R>(
   fn: (item: T) => Promise<R> | R
 ): Promise<{
   results: { item: T; result: R }[];
-  errors: { item: T; error: unknown }[];
+  errors: { item: T; error: Error }[];
 }> {
   const queue = [...items];
   const results: { item: T; result: R }[] = [];
-  const errors: { item: T; error: unknown }[] = [];
+  const errors: { item: T; error: Error }[] = [];
 
   const worker = async () => {
     while (queue.length > 0) {
@@ -18,7 +18,7 @@ export async function parallelo<T, R>(
           const result = await fn(item);
           results.push({ item, result });
         } catch (error) {
-          errors.push({ item, error });
+          errors.push({ item, error: error as Error });
         }
       }
     }

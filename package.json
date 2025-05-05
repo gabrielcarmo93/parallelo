@@ -1,6 +1,6 @@
 {
   "name": "parallelo",
-  "version": "1.0.0",
+  "version": "1.0.4sim",
   "main": "dist/index.js",
   "files": ["dist"],
   "scripts": {
